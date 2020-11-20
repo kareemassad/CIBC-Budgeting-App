@@ -1,7 +1,0 @@
-# Contributing
-
-1) setup virtual env by running
-
-`python3 -m  venv venv`
-
-Vscode should automatically make it your default environment
