@@ -31,8 +31,10 @@ def make_json(csvFilePath, jsonFilePath):
 
 # Decide the two file paths according to your
 # computer system
-csvFilePath = "transactions/csv/savings.csv"
-jsonFilePath = "transactions/json/savings.json"
+# csvFilePath = "transactions/csv/checking.csv"
+# jsonFilePath = "transactions/json/checking1.json"
+csvFilePath = "test.csv"
+jsonFilePath = "test.json"
 
 # Call the make_json function
 make_json(csvFilePath, jsonFilePath)
