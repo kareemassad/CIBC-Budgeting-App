@@ -1,4 +1,4 @@
 black
-pip install numpy==1.19.3
+numpy==1.19.3
 pandas
 matplotlib
