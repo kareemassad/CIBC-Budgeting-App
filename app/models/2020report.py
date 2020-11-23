@@ -17,14 +17,14 @@ savings_data["Transaction Date"] = pd.to_datetime(savings_data["Transaction Date
 savings_data["Year_Month"] = savings_data["Transaction Date"].dt.strftime("%Y-%m")
 
 # Set upper and lower bounds
-credit_data = credit_data[~(credit_data["Transaction Date"] < "2020-1-1")]
-credit_data = credit_data[~(credit_data["Transaction Date"] > "2021-1-1")]
+credit_data = credit_data[~(credit_data["Transaction Date"] <= "2020-1-1")]
+credit_data = credit_data[~(credit_data["Transaction Date"] >= "2021-1-1")]
 
-checking_data = checking_data[~(checking_data["Transaction Date"] < "2020-1-1")]
-checking_data = checking_data[~(checking_data["Transaction Date"] > "2021-1-1")]
+checking_data = checking_data[~(checking_data["Transaction Date"] <= "2020-1-1")]
+checking_data = checking_data[~(checking_data["Transaction Date"] >= "2021-1-1")]
 
-savings_data = savings_data[~(savings_data["Transaction Date"] < "2020-1-1")]
-savings_data = savings_data[~(savings_data["Transaction Date"] > "2021-1-1")]
+savings_data = savings_data[~(savings_data["Transaction Date"] <= "2020-1-1")]
+savings_data = savings_data[~(savings_data["Transaction Date"] >= "2021-1-1")]
 
 
 # Remove unused columns
