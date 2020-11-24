@@ -3,9 +3,10 @@ import matplotlib.pyplot as plt
 
 
 class MyData:
-    visa_path: str = "transactions/csv/visa.csv"
-    checkings_path: str = "transactions/csv/checking.csv"
-    savings_path: str = "transactions/csv/savings.csv"
+    def __init__(self, visa_path: str, checkings_path: str, savings_path: str):
+        self.visa_path = visa_path
+        self.checkings_path = checkings_path
+        self.savings_path = savings_path
 
     def read_my_csv(path: str) -> pd.DataFrame:
         """Read in the data from transaction csv files.
@@ -44,7 +45,7 @@ class MyData:
         data = data.drop(columns=remove_columns)
         return data
 
-    def group_datasets(frames: list) -> pd.DataFrame:
+    def combine_datasets(frames: list) -> pd.DataFrame:
         """Combine multiple datasets together.
 
         Args:
@@ -94,40 +95,3 @@ class MyData:
         data = data[~(data["Year_Month"] < lower_bound)]
         data = data[~(data["Year_Month"] > upper_bound)]
         return data
-
-
-# Read
-visa_data = MyData.read_my_csv(MyData.visa_path)
-checkings_data = MyData.read_my_csv(MyData.checkings_path)
-savings_data = MyData.read_my_csv(MyData.savings_path)
-
-# Organize
-visa_data = MyData.organize_data(visa_data, ["Card", "Transaction Date"])
-checkings_data = MyData.organize_data(checkings_data)
-savings_data = MyData.organize_data(savings_data)
-
-
-# Set bounds to  2020/2021
-lower_bound = "2020-01"
-upper_bound = "2021-01"
-
-visa_data = MyData.set_data_bounds(visa_data, upper_bound, lower_bound)
-checkings_data = MyData.set_data_bounds(checkings_data, upper_bound, lower_bound)
-savings_data = MyData.set_data_bounds(savings_data, upper_bound, lower_bound)
-
-# Group
-frames = [visa_data, checkings_data, savings_data]
-combined_data = MyData.group_datasets(frames)
-
-# Group by Y-M and sort
-data_group = combined_data.groupby("Year_Month").sum().sort_values(by="Year_Month")
-
-# Sum
-expenseSum = MyData.sum_columns(combined_data, ["Expense"])
-incomeSum = MyData.sum_columns(combined_data, ["Income"])
-
-total = incomeSum[0] - expenseSum[0]
-print(f"Your current total balance is {total} CAD")
-
-# visualize
-MyData.visualize_bar_graph(data_group)
