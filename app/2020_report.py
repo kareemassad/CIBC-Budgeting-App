@@ -33,7 +33,7 @@ combined_data = MyData.combine_datasets(frames)
 print(combined_data)
 
 # Group by Y-M and sort
-data_group = combined_data.groupby("Year_Month").sum()
+data_group = combined_data.groupby("Date").sum()
 print(data_group)
 # Sum
 expenseSum = MyData.sum_columns(data_group, ["Expense"])

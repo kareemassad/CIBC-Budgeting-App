@@ -1,5 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import string
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+from nltk.stem.porter import PorterStemmer
+import re
 
 
 class MyData:
@@ -17,7 +22,7 @@ class MyData:
         Returns:
             DataFrame: A tabulated data set from the provided csv file.
         """
-        csv_data: pd.DataFrame = pd.read_csv(path)
+        csv_data = pd.read_csv(path)
         return csv_data
 
     def write_my_csv(path: str, finished_data) -> None:
@@ -32,7 +37,7 @@ class MyData:
     def organize_data(
         data: pd.DataFrame, remove_columns=["Transaction Date"]
     ) -> pd.DataFrame:
-        """Fix name of columns and remove useless ones. Transaction Date will be come Year_Month.
+        """Fix name of columns and remove useless ones. Transaction Date will be come Date.
         Args:
             data (DataFrame): A tabulated data set
             remove_columns (list, optional): The columns you would like to remove after cleanup.. Defaults to ["Transaction Date"].
@@ -41,7 +46,7 @@ class MyData:
             DataFrame: An organized tabulated data set
         """
         data["Transaction Date"] = pd.to_datetime(data["Transaction Date"])
-        data["Year_Month"] = data["Transaction Date"].dt.strftime("%Y-%m")
+        data["Date"] = data["Transaction Date"].dt.strftime("%Y-%m")
         data = data.drop(columns=remove_columns)
         return data
 
@@ -92,6 +97,28 @@ class MyData:
         Returns:
             DataFrame: A tabulated dataset
         """
-        data = data[~(data["Year_Month"] < lower_bound)]
-        data = data[~(data["Year_Month"] > upper_bound)]
+        data = data[~(data["Date"] < lower_bound)]
+        data = data[~(data["Date"] > upper_bound)]
         return data
+
+    def remove_punctuation(text: str) -> str:
+        no_punct = "".join([c for c in text if c not in string.punctuation])
+        return no_punct
+
+    def remove_stopwords(text: str) -> list:
+        words = [w for w in text if w not in stopwords.words("english")]
+        return words
+
+    def word_lemmatizer(text: str) -> list:
+        lemmatizer = WordNetLemmatizer()
+        lemmed_text = [lemmatizer.lemmatize(i) for i in text]
+        return lemmed_text
+
+    def word_stemmer(text: str) -> list:
+        stemmer = PorterStemmer()
+        stemmerd = " ".join([stemmer.stem(i) for i in text])
+        return stemmerd
+
+    def remove_single_characters(text: str) -> str:
+        text = re.sub(r"\s+[a-zA-Z]\s+", " ", text)
+        return text
