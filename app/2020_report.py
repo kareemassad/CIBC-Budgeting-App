@@ -30,21 +30,31 @@ savings_data = MyData.set_data_bounds(savings_data, upper_bound, lower_bound)
 # Group
 frames = [visa_data, checkings_data, savings_data]
 combined_data = MyData.combine_datasets(frames)
+
+combined_data["Year_Month"] = pd.to_datetime(combined_data["Year_Month"])
+combined_data["Year_Month"].min(), combined_data["Year_Month"].max()
+
+
+combined_data["Transaction"] = combined_data["Income"].fillna(0) - combined_data[
+    "Expense"
+].fillna(0)
+
+combined_data.drop(columns=["Expense", "Income"])
 print(combined_data)
 
-# Group by Y-M and sort
-data_group = combined_data.groupby("Year_Month").sum()
-print(data_group)
-# Sum
-expenseSum = MyData.sum_columns(data_group, ["Expense"])
-incomeSum = MyData.sum_columns(data_group, ["Income"])
+# # Group by Y-M and sort
+# data_group = combined_data.groupby("Year_Month").sum()
+# print(data_group)
+# # Sum
+# expenseSum = MyData.sum_columns(data_group, ["Expense"])
+# incomeSum = MyData.sum_columns(data_group, ["Income"])
 
-total = incomeSum[0] - expenseSum[0]
-print(f"Your current total balance is {total} CAD")
+# total = incomeSum[0] - expenseSum[0]
+# print(f"Your current total balance is {total} CAD")
 
-# visualize
-MyData.visualize_bar_graph(data_group)
+# # visualize
+# MyData.visualize_bar_graph(data_group)
 
-# Write csv
-MyData.write_my_csv("transactions/csv/new/all_data.csv", combined_data)
-MyData.write_my_csv("transactions/csv/new/income_expenses.csv", data_group)
+# # Write csv
+# MyData.write_my_csv("transactions/csv/new/all_data.csv", combined_data)
+# MyData.write_my_csv("transactions/csv/new/income_expenses.csv", data_group)

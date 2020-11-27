@@ -19,15 +19,15 @@ checkings_data = MyData.organize_data(checkings_data)
 savings_data = MyData.organize_data(savings_data)
 
 # Set bounds to  2020/2021
-lower_bound = "2020-11"
-upper_bound = "2020-11"
+lower_bound = "2020-10"
+upper_bound = "2020-10"
 
 visa_data = MyData.set_data_bounds(visa_data, upper_bound, lower_bound)
 checkings_data = MyData.set_data_bounds(checkings_data, upper_bound, lower_bound)
 savings_data = MyData.set_data_bounds(savings_data, upper_bound, lower_bound)
 
 # Group
-frames = [visa_data, checkings_data, savings_data]
+frames = [checkings_data]
 combined_data = MyData.combine_datasets(frames)
 print(combined_data)
 
