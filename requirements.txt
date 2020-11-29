@@ -4,3 +4,6 @@ pandas
 matplotlib
 nltk
 sklearn
+textblob
+colarama
+tabulate

@@ -1,20 +1,19 @@
-Income
+Income - Work
+Income - Transfer
 Bill - General
 Bill - Utilities
 Bill - Communications
-Travel - General
+Bill - Property
+Retail - General
+Retail - Clothes
+Retail - Dining
+Retail - Grocery
+Retail - Luxury
+Withdrawl - ATM
+Withdrawl - Transfer
+Withdrawl - Paypal/Venmo
 Travel - Car
-Travel - Petrol
-Supermarket
-Cash Out
-Eating Out
-House
-Books
-Craft
-Charity Shop       
-Presents
-Toiletries
-Mortgage
-Paypal
+Travel - Vacation
+Medical
+Charity
 Unclassified
-Other
