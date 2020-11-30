@@ -1,68 +1,89 @@
 
 Bill - Utilities
 Bill - Utilities
-Bill - Utilities
-Unclassified
-Unclassified
-Income
+Income - Transfer
+Withdrawl - Transfer
+Income - Work
 Bill - General
-Unclassified
-Unclassified
-Unclassified
-Unclassified
-Unclassified
-Unclassified
-Unclassified
-Eating Out
-Eating Out
-Bill - Utilities
-eTransfer
-Income
-Bill - General
-eTransfer
-eTransfer
-eTransfer
-Unclassified
-Eating Out
-Eating Out
-Eating Out
-Tea
-Supermarket
-Unclassified
-eTransfer
-eTransfer
-Bill - General
-Unclassified
-Supermarket
-Supermarket
-Supermarket
-Supermarket
-Supermarket
-Unclassified
-Unclassified
-Travel - Petrol
-Eating Out
-Eating Out
-Unclassified
-Unclassified
-Supermarket
-Bill - Utilities
-eTransfer
-Income
-Bill - General
-Travel
+Travel - Car
 Bill - General
 Medical
-Retail - Food
-Retail - Food
-Retail - Food
-Retail - General
-Retail - General
-Luxury
-eTransfer
-eTransfer
-eTransfer
-Bill - General
+Withdrawl - Transfer
+Retail - Dining
+Income - Transfer
+Retail - Dining
+Retail - Dining
 Medical
-eTransfer
-Retail - Food
+Retail - Grocery
+Income - Transfer
+Retail - Grocery
+Retail - Luxury
+Income - Transfer
+Withdrawl - Transfer
+Bill - General
+Income - Transfer
+Retail - Luxury
+Retail - Grocery
+Retail - General
+Retail - Luxury
+Retail - General
+Income - Transfer
+Income - Transfer
+Retail - Grocery
+Retail - Grocery
+Income - Transfer
+Income - Transfer
+Retail - Luxury
+Retail - Luxury
+Retail - Grocery
+Income - Transfer
+Income - Transfer
+Travel - Car
+Retail - Luxury
+Retail - Dining
+Withdrawl - Paypal/Venmo
+Income - Transfer
+Retail - Clothes
+Retail - Clothes
+Retail - Luxury
+Retail - General
+Income - Transfer
+Withdrawl - Transfer
+Retail - Dining
+Retail - Dining
+Income - Transfer
+Retail - General
+Retail - Grocery
+Income - Transfer
+Retail - Dining
+Bill - General
+Retail - Grocery
+Withdrawl - Transfer
+Unclassified
+Income - Transfer
+Retail - Luxury
+Retail - General
+Retail - Dining
+Income - Transfer
+Retail - General
+Retail - General
+Withdrawl - Transfer
+Retail - General
+Retail - General
+Retail - General
+Retail - General
+Retail - Grocery
+Retail - Dining
+Retail - Dining
+Retail - Dining
+Retail - Dining
+Retail - Dining
+Retail - Luxury
+Retail - General
+Income - Transfer
+Income - Transfer
+Retail - Grocery
+Retail - Dining
+Retail - Grocery
+Retail - Dining
+Retail - Dining

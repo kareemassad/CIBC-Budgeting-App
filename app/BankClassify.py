@@ -32,7 +32,7 @@ class BankClassify:
         if bank == "cibc":
             print("adding CIBC bank data!")
             self.new_data = self._read_cibc_csv(filename)
-        # elif bank == "cibc":
+        # elif bank == "TD":
         #     print("adding CIBC bank data!")
         #     self.new_data = self._read_cibc_csv(filename)
 
@@ -66,7 +66,7 @@ class BankClassify:
         """Read list of categories from categories.txt"""
         categories = {}
 
-        with open("attempt/categories.txt") as f:
+        with open("app/categories.txt") as f:
             for i, line in enumerate(f.readlines()):
                 categories[i] = line.strip()
 
