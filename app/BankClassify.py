@@ -9,7 +9,7 @@ from tabulate import tabulate
 
 
 class BankClassify:
-    def __init__(self, data="AllData.csv"):
+    def __init__(self, data="transactions/csv/new/AllData.csv"):
         """Load in the previous data (by default from `data`) and initialise the classifier"""
 
         # allows dynamic training data to be used (i.e many accounts in a loop)
@@ -142,55 +142,6 @@ class BankClassify:
     def _make_date_index(self, df):
         """Make the index of df a Datetime index"""
         df.index = pd.DatetimeIndex(df.date.apply(dateutil.parser.parse, dayfirst=True))
-
-        return df
-
-    def _read_nationwide_file(self, filename):
-        """Read a file in the csv file that Nationwide provides downloads in.
-        Returns a pd.DataFrame with columns of 'date', 'desc' and 'amount'."""
-
-        with open(filename) as f:
-            lines = f.readlines()
-
-        dates = []
-        descs = []
-        amounts = []
-
-        for line in lines[5:]:
-
-            line = "".join(i for i in line if ord(i) < 128)
-            if line.strip() == "":
-                continue
-
-            splits = line.split('","')
-            """
-            0 = Date
-            1 = Transaction type
-            2 = Description
-            3 = Paid Out
-            4 = Paid In
-            5 = Balance
-            """
-            date = splits[0].replace('"', "").strip()
-            date = datetime.strptime(date, "%d %b %Y").strftime("%d/%m/%Y")
-            dates.append(date)
-
-            # get spend/pay in amount
-            if splits[3] != "":  # paid out
-                spend = float(re.sub("[^0-9\.-]", "", splits[3])) * -1
-            else:  # paid in
-                spend = float(re.sub("[^0-9\.-]", "", splits[4]))
-
-            amounts.append(spend)
-
-            # Description
-            descs.append(splits[2])
-
-        df = pd.DataFrame({"date": dates, "desc": descs, "amount": amounts})
-
-        df["amount"] = df.amount.astype(float)
-        df["desc"] = df.desc.astype(str)
-        df["date"] = df.date.astype(str)
 
         return df
 

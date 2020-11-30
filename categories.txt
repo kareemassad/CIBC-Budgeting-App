@@ -87,3 +87,18 @@ Retail - Dining
 Retail - Grocery
 Retail - Dining
 Retail - Dining
+Bill - Utilities
+Income - Transfer
+Withdrawl - Transfer
+Income - Work
+Unclassified
+Unclassified
+Bill - General
+Medical
+Retail - Dining
+Retail - Dining
+Retail - Dining
+Medical
+Retail - General
+Retail - General
+Retail - Grocery
