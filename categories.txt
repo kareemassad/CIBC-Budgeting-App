@@ -102,3 +102,4 @@ Medical
 Retail - General
 Retail - General
 Retail - Grocery
+Unclassified
