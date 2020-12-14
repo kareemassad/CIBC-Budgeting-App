@@ -1,27 +1,27 @@
 # Contributing
 
-1) setup virtual env by running
+1) Setup virtual env. Vscode should automatically make it your default environment.
 
-```bash
-python3 -m  venv venv
-```
+    ```git
+    python3 -m  venv venv
+    ```
 
-Vscode should automatically make it your default environment
+2) Setup pre-commit to run on every commit.
 
-2) Create a new branch using the following command
+    ```git
+    pre-commit install
+    ```
 
-```bash
-git checkout -b branchName
-```
+    You also could run it manually.
 
-3) After making your changes or adding any features, create a pull request. After it is reviewed it will be merged to the code base.
+    ```git
+    pre-commit run --all-files
+    ```
 
+3) Create a new branch using the following command.
 
-## Pre-commit
+    ```git
+    git checkout -b branch_name
+    ```
 
-run `pre-commit install`
-
-`pre-commit run --all-files`
-
-
-`python -m textblob.download_corpora`
+4) After making your changes or adding any features, create a pull request. After it is reviewed it will be merged to the code base. 
