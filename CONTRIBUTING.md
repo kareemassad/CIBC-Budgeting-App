@@ -14,4 +14,11 @@ Vscode should automatically make it your default environment
 git checkout -b branchName
 ```
 
-3) After making your changes or adding any features, create a pull request. After it is reviewed it will be merged to the code base. 
+3) After making your changes or adding any features, create a pull request. After it is reviewed it will be merged to the code base.
+
+
+## Pre-commit
+
+run `pre-commit install`
+
+`pre-commit run --all-files`
