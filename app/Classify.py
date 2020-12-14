@@ -1,5 +1,5 @@
-from BankClassify import BankClassify
+from BankClassify import Classify
 
-bc = BankClassify()
+bc = Classify()
 
 bc.add_data("transactions/csv/old/checking.csv", "cibc")
