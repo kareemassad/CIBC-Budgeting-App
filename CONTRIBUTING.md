@@ -22,3 +22,6 @@ git checkout -b branchName
 run `pre-commit install`
 
 `pre-commit run --all-files`
+
+
+`python -m textblob.download_corpora`
