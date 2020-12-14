@@ -92,7 +92,7 @@ class Classify:
         with open("categories.txt", "a") as f:
             f.write("\n" + category)
 
-    def _ask_with_guess(self, df: DataFrame) -> DataFrame:
+    def _ask_with_guess(self, df: pd.DataFrame) -> pd.DataFrame:
         """Interactively guess categories for each transaction in df, asking each time if the guess
         is correct
 
@@ -161,7 +161,7 @@ class Classify:
 
         return df
 
-    def _make_date_index(self, df: DataFrame) -> DataFrame:
+    def _make_date_index(self, df: pd.DataFrame) -> pd.DataFrame:
         """Make the index of df a Datetime index
 
         Args:
@@ -174,7 +174,7 @@ class Classify:
 
         return df
 
-    def _read_cibc_csv(self, file_path: str) -> DataFrame:
+    def _read_cibc_csv(self, file_path: str) -> pd.DataFrame:
         """Read a file in the CSV format that the CIBC Bank provides.
 
         Args:
@@ -206,7 +206,7 @@ class Classify:
         df = data.astype({"desc": str, "date": str, "amount": float})
         return df
 
-    def _get_training(self, df: DataFrame) -> list:
+    def _get_training(self, df: pd.DataFrame) -> list:
         """Get training data for the classifier, consisting of tuples of (text, category)
 
         Args:

@@ -7,4 +7,5 @@ sklearn
 textblob
 colorama
 tabulate
-textblob.download_corpora
+pre-commit
+python-dateutil
