@@ -8,9 +8,13 @@ from colorama import init, Fore, Style
 from tabulate import tabulate
 
 
-class BankClassify:
+class Classify:
     def __init__(self, data="transactions/csv/new/AllData.csv"):
-        """Load in the previous data (by default from `data`) and initialise the classifier"""
+        """Load in the previous data (by default from `data`) and initialise the classifier
+
+        Args:
+            data (str, optional): The path to the data that is loaded in. Defaults to "transactions/csv/new/AllData.csv".
+        """
 
         # allows dynamic training data to be used (i.e many accounts in a loop)
         self.trainingDataFile = data
@@ -24,17 +28,19 @@ class BankClassify:
             self._get_training(self.prev_data), self._extractor
         )
 
-    def add_data(self, filename, bank="cibc"):
+    def add_data(self, file_path: str, bank: str = "cibc"):
         """Add new data and interactively classify it.
-        Arguments:
-         - filename: filename and path of file
+        Args:
+            file_path (string): The path of the csv file.
+            bank (str, optional): Name of the bank the data belongs to. Defaults to "cibc".
         """
+
         if bank == "cibc":
             print("adding CIBC bank data!")
-            self.new_data = self._read_cibc_csv(filename)
+            self.new_data = self._read_cibc_csv(file_path)
         # elif bank == "TD":
         #     print("adding CIBC bank data!")
-        #     self.new_data = self._read_cibc_csv(filename)
+        #     self.new_data = self._read_cibc_csv(file_path)
 
         self._ask_with_guess(self.new_data)
 
@@ -42,8 +48,9 @@ class BankClassify:
         # save data to the same file we loaded earlier
         self.prev_data.to_csv(self.trainingDataFile, index=False)
 
-    def _prep_for_analysis(self):
+    def _prepare_for_analysis(self):
         """Prepare data for analysis in pandas, setting index types and subsetting"""
+
         self.prev_data = self._make_date_index(self.prev_data)
 
         self.prev_data["cat"] = self.prev_data["cat"].str.strip()
@@ -62,8 +69,12 @@ class BankClassify:
             (self.out.cat != "Ignore") & (self.out.cat != "Expenses")
         ]
 
-    def _read_categories(self):
-        """Read list of categories from categories.txt"""
+    def _read_categories(self) -> dict:
+        """Read list of categories from categories.txt. These are the items the classifier could guess.
+
+        Returns:
+            dict: The categories the classifier could guess.
+        """
         categories = {}
 
         with open("app/categories.txt") as f:
@@ -72,14 +83,25 @@ class BankClassify:
 
         return categories
 
-    def _add_new_category(self, category):
-        """Add a new category to categories.txt"""
+    def _add_new_category(self, category: str):
+        """Add a new category to categories.txt
+
+        Args:
+            category (str): The category being added.
+        """
         with open("categories.txt", "a") as f:
             f.write("\n" + category)
 
-    def _ask_with_guess(self, df):
+    def _ask_with_guess(self, df: pd.DataFrame) -> pd.DataFrame:
         """Interactively guess categories for each transaction in df, asking each time if the guess
-        is correct"""
+        is correct
+
+        Args:
+            df (DataFrame): The dataframe containing your data.
+
+        Returns:
+            DataFrame: A dataframe with a new categories column that contains the classifier's guesses.
+        """
         # Initialise colorama
         init()
 
@@ -139,17 +161,30 @@ class BankClassify:
 
         return df
 
-    def _make_date_index(self, df):
-        """Make the index of df a Datetime index"""
+    def _make_date_index(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Make the index of df a Datetime index
+
+        Args:
+            df (DataFrame): Your csv data.
+
+        Returns:
+            DataFrame: Your data modified to use the date as the index
+        """
         df.index = pd.DatetimeIndex(df.date.apply(dateutil.parser.parse, dayfirst=True))
 
         return df
 
-    def _read_cibc_csv(self, filename):
-        """Read a file in the CSV format that CIBC Bank provides downloads in.
-        Returns a pd.DataFrame with columns of 'date', 'desc', and 'amount'."""
+    def _read_cibc_csv(self, file_path: str) -> pd.DataFrame:
+        """Read a file in the CSV format that the CIBC Bank provides.
 
-        data = pd.read_csv(filename)
+        Args:
+            file_path (str): [description]
+
+        Returns:
+            DataFrame: A DataFrame with columns of 'date', 'desc', and 'amount'.
+        """
+
+        data = pd.read_csv(file_path)
         data["Transaction Date"] = pd.to_datetime(data["Transaction Date"])
         data["Year_Month"] = data["Transaction Date"].dt.strftime("%Y-%m")
         data["Year_Month"] = pd.to_datetime(data["Year_Month"])
@@ -157,7 +192,7 @@ class BankClassify:
         data["Transaction"] = data["Income"].fillna(0) - data["Expense"].fillna(0)
         data.drop(columns=["Expense", "Income"])
 
-        """Rename columns """
+        # Rename columns
         data.rename(
             columns={
                 "Description": "desc",
@@ -171,9 +206,15 @@ class BankClassify:
         df = data.astype({"desc": str, "date": str, "amount": float})
         return df
 
-    def _get_training(self, df):
-        """Get training data for the classifier, consisting of tuples of
-        (text, category)"""
+    def _get_training(self, df: pd.DataFrame) -> list:
+        """Get training data for the classifier, consisting of tuples of (text, category)
+
+        Args:
+            df (DataFrame): Your csv data.
+
+        Returns:
+            list: The training data used for the classifier containing a tuple.
+        """
         train = []
         subset = df[df["cat"] != ""]
         for i in subset.index:
@@ -183,8 +224,15 @@ class BankClassify:
 
         return train
 
-    def _extractor(self, doc):
-        """Extract tokens from a given string"""
+    def _extractor(self, doc: str) -> dict:
+        """Extract tokens from a given string.
+
+        Args:
+            doc (str): The word to split.
+
+        Returns:
+            dict: The extracted tokens.
+        """
         # TODO: Extend to extract words within words
         # For example, MUSICROOM should give MUSIC and ROOM
         tokens = self._split_by_multiple_delims(doc, [" ", "/"])
@@ -198,12 +246,26 @@ class BankClassify:
 
         return features
 
-    def _strip_numbers(self, s):
-        """Strip numbers from the given string"""
+    def _strip_numbers(self, s: str) -> str:
+        """Strip numbers from the given string.
+        Args:
+            s (str): The string to be stripped.
+
+        Returns:
+            str: A string with the numbers stripped.
+        """
         return re.sub("[^A-Z ]", "", s)
 
-    def _split_by_multiple_delims(self, string, delims):
-        """Split the given string by the list of delimiters given"""
+    def _split_by_multiple_delims(self, s: str, delims: list) -> list:
+        """Split the given string by the list of delimiters given.
+
+        Args:
+            s (str): The string to be changed.
+            delims (list): Delimiters to apply on the string.
+
+        Returns:
+            list: A list of strings that were stripped from the given string.
+        """
         regexp = "|".join(delims)
 
-        return re.split(regexp, string)
+        return re.split(regexp, s)
